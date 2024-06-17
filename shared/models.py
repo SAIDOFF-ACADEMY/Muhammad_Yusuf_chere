@@ -25,6 +25,9 @@ class Settings(models.Model):
         verbose_name = 'Settings'
         verbose_name_plural = "Settings"
 
+    def __str__(self):
+        return self.contact_telegram
+
 
 class Page(models.Model):
     title_uz = models.CharField(max_length=250)
