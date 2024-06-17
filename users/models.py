@@ -18,14 +18,14 @@ class CustomUser(AbstractUser, BaseModel):
         verbose_name_plural = 'Users'
 
 
-# class UserContactApplication(BaseModel):
-#     full_name = models.CharField(max_length=255)
-#     phone = models.CharField(max_length=50, unique=True)
-#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return self.full_name
-#
-#     class Meta:
-#         verbose_name = 'User Contact Application'
-#         verbose_name_plural = 'User Contact Applications'
+class UserContactApplication(BaseModel):
+    full_name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=50, unique=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.full_name
+
+    class Meta:
+        verbose_name = 'User Contact Application'
+        verbose_name_plural = 'User Contact Applications'
