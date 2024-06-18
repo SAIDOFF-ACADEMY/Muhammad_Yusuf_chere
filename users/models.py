@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from shared.models import BaseModel
 
 
-class CustomUser(AbstractUser, BaseModel):
+class User(AbstractUser, BaseModel):
     telegram_id = models.BigIntegerField(unique=True, null=True, blank=True)
     full_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=30, unique=True)
@@ -21,7 +21,7 @@ class CustomUser(AbstractUser, BaseModel):
 class UserContactApplication(BaseModel):
     full_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=50, unique=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.full_name
