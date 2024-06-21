@@ -22,7 +22,7 @@ class Order(models.Model):
     status_changed_at = models.DateTimeField(auto_now=True)
     product_price = models.BigIntegerField()
     total_price = models.BigIntegerField()
-    admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin')
+    admin = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Order by {self.customer}'

@@ -18,7 +18,7 @@ class Product(BaseModel):
 
 
 class FreeProduct(BaseModel):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='free_products')
     count = models.IntegerField()
     free_count = models.IntegerField()
 

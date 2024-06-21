@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from decouple import config
 
-USE_I18N = True
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,7 +48,7 @@ INSTALLED_APPS = [
     'shared',
     'common',
     'order',
-
+    'bot',
 ]
 
 MIDDLEWARE = [
@@ -154,7 +153,6 @@ LANGUAGES = [
     ('uz', 'Uzbekistan'),
 ]
 # CKE editor
-# CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
