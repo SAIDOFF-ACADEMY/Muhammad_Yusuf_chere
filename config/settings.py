@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'users',
     'products',
     'shared',
+    'common',
+    'order',
 
 ]
 
@@ -160,3 +162,7 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+
+LOCALE_PATHS = (
+    BASE_DIR / 'locale',
+)

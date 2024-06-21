@@ -18,7 +18,7 @@ class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     longitude = models.FloatField()
     latitude = models.FloatField()
-    status = models.TextField(max_length=100, choices=Status)
+    status = models.TextField(max_length=100, choices=Status.choices)
     status_changed_at = models.DateTimeField(auto_now=True)
     product_price = models.BigIntegerField()
     total_price = models.BigIntegerField()
