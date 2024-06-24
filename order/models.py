@@ -1,6 +1,7 @@
 from django.db import models
 from products.models import Product
 from users.models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class Order(models.Model):
@@ -28,6 +29,6 @@ class Order(models.Model):
         return f'Order by {self.customer}'
 
     class Meta:
-        verbose_name = 'Order'
-        verbose_name_plural = 'Orders'
+        verbose_name = _('Order')
+        verbose_name_plural = _('Orders')
 

@@ -2,6 +2,7 @@ from django.db import models
 from users.models import User
 from shared.models import BaseModel
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.translation import gettext_lazy as _
 
 
 class Product(BaseModel):
@@ -13,8 +14,8 @@ class Product(BaseModel):
         return self.name
 
     class Meta:
-        verbose_name = 'Product'
-        verbose_name_plural = 'Products'
+        verbose_name = _('Product')
+        verbose_name_plural = _('Products')
 
 
 class FreeProduct(BaseModel):
@@ -26,8 +27,8 @@ class FreeProduct(BaseModel):
         return f'{self.product} - {self.count}'
 
     class Meta:
-        verbose_name = 'Free Product'
-        verbose_name_plural = 'Free Products'
+        verbose_name = _('Free Product')
+        verbose_name_plural = _('Free Products')
 
 
 class GalleryPhoto(BaseModel):
@@ -37,6 +38,6 @@ class GalleryPhoto(BaseModel):
         return self.photo.name
 
     class Meta:
-        verbose_name = 'Gallery Photo'
-        verbose_name_plural = 'Gallery Photos'
+        verbose_name = _('Gallery Photo')
+        verbose_name_plural = _('Gallery Photos')
 

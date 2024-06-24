@@ -1,6 +1,7 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from shared.models import BaseModel
+from django.utils.translation import gettext_lazy as _
 
 
 class Settings(BaseModel):
@@ -14,8 +15,8 @@ class Settings(BaseModel):
     telegram_bot = models.CharField(max_length=120)
 
     class Meta:
-        verbose_name = 'Settings'
-        verbose_name_plural = "Settings"
+        verbose_name = _('Settings')
+        verbose_name_plural = _("Settings")
 
     def __str__(self):
         return self.contact_telegram
@@ -30,5 +31,5 @@ class Page(BaseModel):
         return self.title
 
     class Meta:
-        verbose_name = 'Page'
-        verbose_name_plural = "Pages"
+        verbose_name = _('Page')
+        verbose_name_plural = _("Pages")

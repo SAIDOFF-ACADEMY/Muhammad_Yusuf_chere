@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from shared.models import BaseModel
+from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser, BaseModel):
@@ -13,8 +14,8 @@ class User(AbstractUser, BaseModel):
         return self.full_name
 
     class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')
 
     username = None
     USERNAME_FIELD = 'email'
@@ -30,5 +31,5 @@ class UserContactApplication(BaseModel):
         return self.full_name
 
     class Meta:
-        verbose_name = 'User Contact Application'
-        verbose_name_plural = 'User Contact Applications'
+        verbose_name = _('User Contact Application')
+        verbose_name_plural = _('User Contact Applications')
