@@ -8,7 +8,7 @@ class User(AbstractUser, BaseModel):
     telegram_id = models.BigIntegerField(unique=True, null=True, blank=True)
     full_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=30, unique=True)
-    email = models.EmailField('email', unique=True)
+    email = models.EmailField(unique=True)
 
     def __str__(self):
         return self.full_name
