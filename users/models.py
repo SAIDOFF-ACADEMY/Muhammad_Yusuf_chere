@@ -9,6 +9,7 @@ class User(AbstractUser, BaseModel):
     full_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
+    lang = models.CharField(max_length=2, choices=(('uz', 'Uzbek'), ('ru', "Russia")), default='uz')
 
     def __str__(self):
         return self.full_name
@@ -19,6 +20,8 @@ class User(AbstractUser, BaseModel):
         db_table = 'users'
 
     username = None
+    first_name = None
+    last_name = None
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
