@@ -16,6 +16,7 @@ class Product(BaseModel):
     class Meta:
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
+        db_table = 'products'
 
 
 class FreeProduct(BaseModel):
@@ -29,10 +30,11 @@ class FreeProduct(BaseModel):
     class Meta:
         verbose_name = _('Free Product')
         verbose_name_plural = _('Free Products')
+        db_table = 'free_products'
 
 
 class GalleryPhoto(BaseModel):
-    photo = models.FileField(upload_to='photos')
+    photo = models.FileField(upload_to='photos/%Y/%m/')
 
     def __str__(self):
         return self.photo.name
@@ -40,4 +42,5 @@ class GalleryPhoto(BaseModel):
     class Meta:
         verbose_name = _('Gallery Photo')
         verbose_name_plural = _('Gallery Photos')
+        db_table = 'gallery_photo'
 

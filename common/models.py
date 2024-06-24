@@ -17,6 +17,7 @@ class Settings(BaseModel):
     class Meta:
         verbose_name = _('Settings')
         verbose_name_plural = _("Settings")
+        db_table = 'settings'
 
     def __str__(self):
         return self.contact_telegram
@@ -33,3 +34,4 @@ class Page(BaseModel):
     class Meta:
         verbose_name = _('Page')
         verbose_name_plural = _("Pages")
+        db_table = 'pages'

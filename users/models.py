@@ -16,6 +16,7 @@ class User(AbstractUser, BaseModel):
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('Users')
+        db_table = 'users'
 
     username = None
     USERNAME_FIELD = 'email'
@@ -33,3 +34,4 @@ class UserContactApplication(BaseModel):
     class Meta:
         verbose_name = _('User Contact Application')
         verbose_name_plural = _('User Contact Applications')
+        db_table = 'user_contact_application'
