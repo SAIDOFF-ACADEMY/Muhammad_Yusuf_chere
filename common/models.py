@@ -6,10 +6,10 @@ from django.utils.translation import gettext_lazy as _
 
 class Settings(BaseModel):
     contact_telegram = models.CharField(max_length=120)
-    contact_phone = models.CharField(max_length=30)
+    contact_phone = models.CharField(max_length=30, null=True, blank=True)
     longitude = models.BigIntegerField()
     latitude = models.BigIntegerField()
-    location_text = models.TextField()
+    location_text = models.TextField(_('location_text'))
     working_hours_start = models.TimeField()
     working_hours_end = models.TimeField()
     telegram_bot = models.CharField(max_length=120)
@@ -20,13 +20,13 @@ class Settings(BaseModel):
         db_table = 'settings'
 
     def __str__(self):
-        return self.contact_telegram
+        return "Settings"
 
 
 class Page(BaseModel):
-    title = models.CharField(max_length=250)
+    title = models.CharField(_('title'), max_length=250)
     slug = models.SlugField(unique=True, max_length=250)
-    content = RichTextUploadingField()
+    content = RichTextUploadingField(_('content'))
 
     def __str__(self):
         return self.title

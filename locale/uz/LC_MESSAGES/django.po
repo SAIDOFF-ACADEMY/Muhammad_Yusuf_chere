@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 10:21+0500\n"
+"POT-Creation-Date: 2024-06-25 13:31+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: .\common\models.py:12
+msgid "location_text"
+msgstr ""
+
 #: .\common\models.py:18 .\common\models.py:19
 msgid "Settings"
 msgstr "Sozlamalar"
 
-#: .\common\models.py:34
+#: .\common\models.py:27
+msgid "title"
+msgstr ""
+
+#: .\common\models.py:29 .\products\models.py:10
+msgid "content"
+msgstr ""
+
+#: .\common\models.py:35
 msgid "Page"
 msgstr "Sahifa"
 
-#: .\common\models.py:35
+#: .\common\models.py:36
 msgid "Pages"
 msgstr "Sahifalar"
 
@@ -37,6 +49,10 @@ msgstr "Buyurtma"
 msgid "Orders"
 msgstr "Buyurtmalar"
 
+#: .\products\models.py:9
+msgid "name"
+msgstr ""
+
 #: .\products\models.py:17
 msgid "Product"
 msgstr "Mahsulot"
@@ -45,34 +61,46 @@ msgstr "Mahsulot"
 msgid "Products"
 msgstr "Mahsulotlar"
 
-#: .\products\models.py:30
+#: .\products\models.py:31
 msgid "Free Product"
 msgstr "Bepul mahsulot"
 
-#: .\products\models.py:31
+#: .\products\models.py:32
 msgid "Free Products"
 msgstr "Bepul mahsulotlar"
 
-#: .\products\models.py:41
+#: .\products\models.py:43
 msgid "Gallery Photo"
 msgstr "Fotogalereya"
 
-#: .\products\models.py:42
+#: .\products\models.py:44
 msgid "Gallery Photos"
 msgstr "Fotogalereyalar"
 
-#: .\users\models.py:17
+#: .\users\admin.py:13
+msgid "Personal info"
+msgstr ""
+
+#: .\users\admin.py:15
+msgid "Permissions"
+msgstr ""
+
+#: .\users\admin.py:26
+msgid "Important dates"
+msgstr ""
+
+#: .\users\models.py:46
 msgid "User"
 msgstr "Foydalanuvchi"
 
-#: .\users\models.py:18
+#: .\users\models.py:47
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
-#: .\users\models.py:34
+#: .\users\models.py:67
 msgid "User Contact Application"
 msgstr "Foydalanuvchi bilan aloqa ilovasi"
 
-#: .\users\models.py:35
+#: .\users\models.py:68
 msgid "User Contact Applications"
 msgstr "Foydalanuvchi bilan aloqa ilovalari"
