@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # packages
+    'drf_yasg',
     'rest_framework',
     "corsheaders",
     'ckeditor',
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'shared',
     'common',
     'order',
-    'bot',
 ]
 
 
