@@ -35,9 +35,10 @@ class UserCreateManager(UserManager):
 class User(AbstractUser, BaseModel):
     telegram_id = models.BigIntegerField(unique=True, null=True, blank=True)
     full_name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=30, unique=True)
+    phone = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
     lang = models.CharField(max_length=2, choices=(('uz', 'Uzbek'), ('ru', "Russia")), default='uz')
+    password = models.CharField(max_length=255)
 
     def __str__(self):
         return self.full_name
@@ -67,3 +68,5 @@ class UserContactApplication(BaseModel):
         verbose_name = _('User Contact Application')
         verbose_name_plural = _('User Contact Applications')
         db_table = 'user_contact_application'
+
+
