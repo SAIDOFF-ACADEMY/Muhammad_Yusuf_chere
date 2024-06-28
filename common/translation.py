@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import Settings, Page
+from .models import Settings, Page, GalleryPhoto
 
 
 @register(Settings)
@@ -10,3 +10,8 @@ class SettingsTranslationOptions(TranslationOptions):
 @register(Page)
 class PageTranslationOptions(TranslationOptions):
     fields = ('title', 'content',)
+
+
+@register(GalleryPhoto)
+class GalleryPhotoTranslationOptions(TranslationOptions):
+    pass

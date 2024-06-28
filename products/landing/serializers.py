@@ -6,10 +6,18 @@ from products import models
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
-        fields = '__all__'
+        fields = (
+            'name',
+            'content',
+            'price',
+        )
 
 
 class FreeProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FreeProduct
-        fields = '__all__'
+        fields = (
+            'product.name',
+            'count',
+            'free_count',
+        )

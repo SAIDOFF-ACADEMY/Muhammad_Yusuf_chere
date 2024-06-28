@@ -1,41 +1,44 @@
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
-from rest_framework.permissions import AllowAny
-from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAdminUser
 
-from users.models import User, UserContactApplication
-from users.serializers import UserSerializer, UserContactApplicationSerializer
-
-
-class UserListAPIView(ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (AllowAny,)
+from users import models
+from users import serializers
 
 
-class UserDetailView(RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (AllowAny,)
+class UserList(ListAPIView):
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+class UserDetail(RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
+    permission_classes = [IsAdminUser]
     lookup_field = 'id'
 
 
-class UserAppliancesListAPIView(ListAPIView):
-    queryset = UserContactApplication.objects.all()
-    serializer_class = UserContactApplicationSerializer
-    permission_classes = (AllowAny,)
+class UserCreate(CreateAPIView):
+    serializer_class = serializers.UserCreateSerializer
+    queryset = models.User.objects.all()
+    permission_classes = [IsAdminUser]
 
 
-class UserAppliancesDetailAPIView(RetrieveAPIView):
-    queryset = UserContactApplication.objects.all()
-    serializer_class = UserContactApplicationSerializer
-    permission_classes = (AllowAny,)
+class UserContactView(ListAPIView):
+    serializer_class = serializers.UserContactSerializer
+    queryset = models.UserContactApplication.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+class UserContactDetail(RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.UserContactSerializer
     lookup_field = 'id'
+    queryset = models.UserContactApplication.objects.all()
+    permission_classes = [IsAdminUser]
 
 
-class UserAppliancesCreateView(CreateAPIView):
-    queryset = UserContactApplication.objects.all()
-    serializer_class = UserContactApplicationSerializer
-    permission_classes = (AllowAny,)
-
-
+class UserContactCreate(CreateAPIView):
+    serializer_class = serializers.UserContactSerializer
+    queryset = models.UserContactApplication
+    permission_classes = [IsAdminUser]

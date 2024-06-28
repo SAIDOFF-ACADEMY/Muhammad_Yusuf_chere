@@ -1,12 +1,15 @@
 from django.urls import path
 
-from .views import SettingsListAPIView, PageListAPIView, PageDetailAPIView
+from common import views
 
-app_name = 'common'
 
 urlpatterns = [
-    path('settings/', SettingsListAPIView.as_view()),
-    path('pages/', PageListAPIView.as_view()),
-    path('page/<slug:slug>/', PageDetailAPIView.as_view()),
-
+    path('settings/', views.SettingsView.as_view()),
+    # pages
+    path('pages/', views.PageView.as_view()),
+    path('page/<slug:slug>/', views.PageDetailUpdateDeleteView.as_view()),
+    path('pages/add/', views.PageCreateView.as_view()),
+    # gallery photos
+    path('photos/', views.GalleryView.as_view()),
+    path('photo/<int:id>/', views.GalleryDetailUpdateView.as_view()),
 ]

@@ -9,6 +9,7 @@ class Product(BaseModel):
     name = models.CharField(_('name'), max_length=100)
     content = RichTextUploadingField(_('content'))
     price = models.BigIntegerField()
+    is_active = models.BooleanField(_('active'), default=True)
 
     def __str__(self):
         return self.name
@@ -32,15 +33,4 @@ class FreeProduct(BaseModel):
         verbose_name_plural = _('Free Products')
         db_table = 'free_products'
 
-
-class GalleryPhoto(BaseModel):
-    photo = models.FileField(upload_to='photos/%Y/%m/')
-
-    def __str__(self):
-        return self.photo.name
-
-    class Meta:
-        verbose_name = _('Gallery Photo')
-        verbose_name_plural = _('Gallery Photos')
-        db_table = 'gallery_photo'
 

@@ -1,45 +1,45 @@
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView, \
+    CreateAPIView
+from rest_framework.permissions import IsAdminUser
 
-from .models import Product, FreeProduct, GalleryPhoto
-from .serializers import ProductSerializer, FreeProductSerializer, GalleryPhotoSerializer
-
-
-class ProductListAPIView(ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [AllowAny]
+from products import models
+from products import serializers
 
 
-class ProductDetailAPIView(RetrieveAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [AllowAny]
+class ProductListView(ListAPIView):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductsSerializer
+    permission_classes = [IsAdminUser]
+
+
+class ProductDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductsSerializer
+    permission_classes = [IsAdminUser]
     lookup_field = 'id'
 
 
-class FreeProductListAPIView(ListAPIView):
-    queryset = FreeProduct.objects.all()
-    serializer_class = FreeProductSerializer
-    permission_classes = [AllowAny]
+class ProductCreateView(CreateAPIView):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductsSerializer
+    permission_classes = [IsAdminUser]
 
 
-class FreeProductDetailAPIView(RetrieveAPIView):
-    queryset = FreeProduct.objects.all()
-    serializer_class = FreeProductSerializer
-    permission_classes = [AllowAny]
+class FreeProductListView(ListAPIView):
+    queryset = models.FreeProduct.objects.all()
+    serializer_class = serializers.FreeProductsSerializer
+    permission_classes = [IsAdminUser]
+
+
+class FreeProductDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+    queryset = models.FreeProduct.objects.all()
+    serializer_class = serializers.FreeProductsSerializer
+    permission_classes = [IsAdminUser]
     lookup_field = 'id'
 
 
-class GalleryPhotoListAPIView(ListAPIView):
-    queryset = GalleryPhoto.objects.all()
-    serializer_class = GalleryPhotoSerializer
-    permission_classes = [AllowAny]
-
-
-class GalleryPhotoDetailAPIView(RetrieveAPIView):
-    queryset = GalleryPhoto.objects.all()
-    serializer_class = GalleryPhotoSerializer
-    permission_classes = [AllowAny]
-    lookup_field = 'id'
+class FreeProductCreateView(CreateAPIView):
+    queryset = models.FreeProduct.objects.all()
+    serializer_class = serializers.FreeProductsSerializer
+    permission_classes = [IsAdminUser]

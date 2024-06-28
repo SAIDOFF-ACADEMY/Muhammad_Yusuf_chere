@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-25 13:31+0500\n"
+"POT-Creation-Date: 2024-06-27 12:26+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,29 +19,37 @@ msgstr ""
 "10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%"
 "100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\common\models.py:12
+#: .\common\models.py:13
 msgid "location_text"
 msgstr ""
 
-#: .\common\models.py:18 .\common\models.py:19
+#: .\common\models.py:19 .\common\models.py:20
 msgid "Settings"
 msgstr "Настройки"
 
-#: .\common\models.py:27
+#: .\common\models.py:28
 msgid "title"
 msgstr ""
 
-#: .\common\models.py:29 .\products\models.py:10
+#: .\common\models.py:30 .\products\models.py:10
 msgid "content"
 msgstr ""
 
-#: .\common\models.py:35
+#: .\common\models.py:36
 msgid "Page"
 msgstr "Страница"
 
-#: .\common\models.py:36
+#: .\common\models.py:37
 msgid "Pages"
 msgstr "Страницы"
+
+#: .\common\models.py:48
+msgid "Gallery Photo"
+msgstr "Галерея Фото"
+
+#: .\common\models.py:49
+msgid "Gallery Photos"
+msgstr "Галерея фотографий"
 
 #: .\order\models.py:32
 msgid "Order"
@@ -71,14 +79,6 @@ msgstr "Бесплатный продукт"
 msgid "Free Products"
 msgstr "Бесплатные продукты"
 
-#: .\products\models.py:43
-msgid "Gallery Photo"
-msgstr "Галерея Фото"
-
-#: .\products\models.py:44
-msgid "Gallery Photos"
-msgstr "Галерея фотографий"
-
 #: .\users\admin.py:13
 msgid "Personal info"
 msgstr ""
@@ -91,18 +91,18 @@ msgstr ""
 msgid "Important dates"
 msgstr ""
 
-#: .\users\models.py:46
+#: .\users\models.py:47
 msgid "User"
 msgstr "Пользователь"
 
-#: .\users\models.py:47
+#: .\users\models.py:48
 msgid "Users"
 msgstr "Пользователи"
 
-#: .\users\models.py:67
+#: .\users\models.py:68
 msgid "User Contact Application"
 msgstr "Заявка на контакт с пользователем"
 
-#: .\users\models.py:68
+#: .\users\models.py:69
 msgid "User Contact Applications"
 msgstr "Заявки на контакт с пользователем"

@@ -1,28 +1,20 @@
 from rest_framework import serializers
-from .models import Settings, Page
+from common import models
 
 
 class SettingsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Settings
-        fields = (
-            'contact_telegram',
-            'contact_phone',
-            'longitude',
-            'latitude',
-            'location_text',
-            'working_hours_start',
-            'working_hours_end',
-            'telegram_bot',
-        )
+        model = models.Settings
+        fields = '__all__'
 
 
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Page
-        fields = (
-            'title',
-            'slug',
-            'content',
-        )
+        model = models.Page
+        fields = '__all__'
 
+
+class GallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GalleryPhoto
+        fields = '__all__'

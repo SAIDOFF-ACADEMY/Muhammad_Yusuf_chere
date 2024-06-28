@@ -1,8 +1,16 @@
 from django.contrib import admin
-from .models import Settings, Page
+from .models import Settings, Page, GalleryPhoto
 from modeltranslation.admin import TranslationAdmin
 
-admin.site.register(Page)
+
+@admin.register(Page)
+class PageAdmin(TranslationAdmin):
+    pass
+
+
+@admin.register(GalleryPhoto)
+class GalleryPhotoAdmin(TranslationAdmin):
+    pass
 
 
 @admin.register(Settings)

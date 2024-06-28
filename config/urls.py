@@ -21,15 +21,20 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('common/', include('common.urls')),
-    path('order/', include('order.urls')),
-    path('products/', include('products.urls')),
-    path('users/', include('users.urls')),
+    # path('api/v1/admin/common/', include('common.urls')),
+    path('api/v1/landing/common/', include('common.landing.urls')),
+    path('api/v1/admin/common/', include('common.urls')),
+    path('api/v1/admin/orders/', include('order.urls')),
+    # path('api/v1/landing/orders/', include('order.landing.urls')),
+    path('api/v1/landing/products/', include('products.landing.urls')),
+    path('api/v1/admin/products/', include('products.urls')),
+    path('api/v1/admin/users/', include('users.urls')),
+    path('api/v1/landing/users/', include('users.landing.urls')),
+
     # packages
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

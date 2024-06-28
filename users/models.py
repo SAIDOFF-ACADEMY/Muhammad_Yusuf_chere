@@ -41,7 +41,7 @@ class User(AbstractUser, BaseModel):
     password = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.full_name
+        return self.full_name or self.email
 
     class Meta:
         verbose_name = _('User')

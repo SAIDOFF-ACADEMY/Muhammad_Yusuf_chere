@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import UserListAPIView, UserDetailView, UserAppliancesListAPIView, UserAppliancesDetailAPIView, \
-                   UserAppliancesCreateView
+
+from users import views
+
 
 urlpatterns = [
-    path('users/', UserListAPIView.as_view()),
-    path('user/<int:id>/', UserDetailView.as_view()),
-    path('appliances/', UserAppliancesListAPIView.as_view()),
-    path('appliance/<int:id>/', UserAppliancesDetailAPIView.as_view()),
-    path('appliance/create/', UserAppliancesCreateView.as_view()),
-
+    path('users/', views.UserList.as_view()),
+    path('users/<int:id>/', views.UserDetail.as_view()),
+    path('users/create/', views.UserCreate.as_view()),
+    path('user_contacts/', views.UserContactView.as_view()),
+    path('user_contact/<int:id>/', views.UserContactDetail.as_view()),
+    path('user_contacts/create/', views.UserContactCreate.as_view()),
 ]
