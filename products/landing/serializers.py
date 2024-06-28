@@ -11,13 +11,16 @@ class ProductsSerializer(serializers.ModelSerializer):
             'content',
             'price',
         )
+        ref_name = 'LandingProductSerializer'
 
 
 class FreeProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FreeProduct
         fields = (
-            'product.name',
+            'product',
             'count',
             'free_count',
         )
+        ref_name = 'LandingFreeProductSerializer'
+

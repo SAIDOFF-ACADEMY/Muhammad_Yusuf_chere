@@ -7,12 +7,16 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = '__all__'
+        ref_name = 'AdminUserSerializer'
+
 
 
 class UserContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserContactApplication
         fields = '__all__'
+        ref_name = 'AdminUserContactSerializer'
+
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
@@ -23,4 +27,5 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'full_name',
             'password',
         )
+        ref_name = 'AdminUserCreateSerializer'
 

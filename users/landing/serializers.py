@@ -10,6 +10,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
             'email',
             'password',
         )
+        ref_name = 'LandingUserSerializer'
 
 
 class UserContactSerializer(serializers.ModelSerializer):
@@ -20,3 +21,5 @@ class UserContactSerializer(serializers.ModelSerializer):
             'phone',
             'users',
         )
+        ref_name = 'LandingUserContactSerializer'
+

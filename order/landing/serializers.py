@@ -16,3 +16,4 @@ class OrderSerializer(serializers.ModelSerializer):
             'product_price',
             'total_price',
         )
+        ref_name = 'LandingOrderSerializer'
