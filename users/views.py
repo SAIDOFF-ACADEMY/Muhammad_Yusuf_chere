@@ -1,6 +1,7 @@
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from users import models
 from users import serializers
@@ -20,7 +21,7 @@ class UserDetail(RetrieveUpdateDestroyAPIView):
 
 
 class UserCreate(CreateAPIView):
-    serializer_class = serializers.UserCreateSerializer
+    serializer_class = serializers.UserContactCreateSerializer
     queryset = models.User.objects.all()
     permission_classes = [IsAdminUser]
 
@@ -42,3 +43,24 @@ class UserContactCreate(CreateAPIView):
     serializer_class = serializers.UserContactSerializer
     queryset = models.UserContactApplication
     permission_classes = [IsAdminUser]
+
+
+class UserLoginView(GenericAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserLoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.save()
+        return Response(data, status=status.HTTP_200_OK)
+
+
+class UserLogOutView(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        if hasattr(request.user, 'auth_token'):
+            request.user.auth_token.delete()
+
+        return Response({'detail': "Successfully logged out"}, status=status.HTTP_200_OK)
