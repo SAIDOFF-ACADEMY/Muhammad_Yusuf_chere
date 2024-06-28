@@ -11,7 +11,6 @@ class OrderSerializer(serializers.ModelSerializer):
             'count',
             'longitude',
             'latitude',
-            'location_text',
             'free_count',
             'product_price',
             'total_price',

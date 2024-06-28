@@ -10,13 +10,11 @@ class UserSerializer(serializers.ModelSerializer):
         ref_name = 'AdminUserSerializer'
 
 
-
 class UserContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserContactApplication
         fields = '__all__'
         ref_name = 'AdminUserContactSerializer'
-
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
@@ -28,4 +26,3 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'password',
         )
         ref_name = 'AdminUserCreateSerializer'
-
