@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import generics
 from product import models
-from product.landing.serializers import ProductSerializer, FreeProductSerializer
+from product.landing.serializers import ProductLandingSerializer, FreeProductLandingSerializer
 
 
 # class ProductView(generics.GenericAPIView):
@@ -57,9 +57,9 @@ from product.landing.serializers import ProductSerializer, FreeProductSerializer
 
 class ProductView(generics.ListCreateAPIView):
     queryset = models.Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductLandingSerializer
 
 
 class FreeProductView(generics.ListCreateAPIView):
     queryset = models.FreeProduct.objects.all()
-    serializer_class = FreeProductSerializer
+    serializer_class = FreeProductLandingSerializer
