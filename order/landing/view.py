@@ -1,12 +1,12 @@
 from rest_framework.generics import GenericAPIView
-from order.landing.serializers import OrderSerializer
+from order.landing.serializers import OrderLandingSerializer
 from order.models import Order
 from rest_framework.response import Response
 
 
 class OrderView(GenericAPIView):
     queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+    serializer_class = OrderLandingSerializer
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
