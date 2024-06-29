@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateAPIView, CreateAPIView, \
-    RetrieveUpdateDestroyAPIView
+    RetrieveUpdateDestroyAPIView, DestroyAPIView
 
 from common import serializers
 from common import models
@@ -60,7 +60,13 @@ class GalleryView(ListAPIView):
     queryset = models.GalleryPhoto.objects.all()
 
 
-class GalleryDetailUpdateView(RetrieveUpdateAPIView):
+class GalleryCreateView(CreateAPIView):
+    serializer_class = serializers.GallerySerializer
+    permission_classes = [IsAdminUser, ]
+    queryset = models.GalleryPhoto.objects.all()
+
+
+class GalleryDeleteView(DestroyAPIView):
     queryset = models.GalleryPhoto.objects.all()
     serializer_class = serializers.GallerySerializer
     permission_classes = [IsAdminUser, ]

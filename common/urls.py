@@ -11,5 +11,6 @@ urlpatterns = [
     path('pages/add/', views.PageCreateView.as_view()),
     # gallery photos
     path('photos/', views.GalleryView.as_view()),
-    path('photo/<int:id>/', views.GalleryDetailUpdateView.as_view()),
+    path('photo/create/', views.GalleryCreateView.as_view()),
+    path('photo/<int:id>/', views.GalleryDeleteView.as_view()),
 ]

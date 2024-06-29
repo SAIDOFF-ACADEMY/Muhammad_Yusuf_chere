@@ -2,6 +2,8 @@ from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+
 from users import models
 
 
@@ -38,14 +40,19 @@ class UserLoginSerializer(serializers.Serializer):
         email = validated_data['email']
         password = validated_data['password']
         user = authenticate(email=email, password=password)
-        if user is None:
-            raise AuthenticationFailed()
         try:
-            token = Token.objects.get(user=user)
-        except Token.DoesNotExist:
-            token = Token.objects.create(user=user)
-        return {
-            'token': token.key,
-        }
+            if user.is_superuser:
+                if user is None:
+                    raise AuthenticationFailed()
+                try:
+                    token = Token.objects.get(user=user)
+                except Token.DoesNotExist:
+                    token = Token.objects.create(user=user)
+                return {
+                    'token': token.key,
+                }
+        except AttributeError:
+            raise AuthenticationFailed()
+
 
 

@@ -14,13 +14,4 @@ class ProductsSerializer(serializers.ModelSerializer):
         ref_name = 'LandingProductSerializer'
 
 
-class FreeProductsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.FreeProduct
-        fields = (
-            'product',
-            'count',
-            'free_count',
-        )
-        ref_name = 'LandingFreeProductSerializer'
 

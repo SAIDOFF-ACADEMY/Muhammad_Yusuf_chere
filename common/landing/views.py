@@ -1,3 +1,5 @@
+import random
+
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, GenericAPIView
 from rest_framework.response import Response
 
@@ -22,14 +24,9 @@ class PageView(RetrieveAPIView):
 
 
 class GalleryPhotoView(ListAPIView):
-    queryset = GalleryPhoto.objects.all()
+    queryset = GalleryPhoto.objects.all().order_by('?')
     serializer_class = GalleryPhotoSerializer
 
-
-class GalleryPhotoDetail(RetrieveAPIView):
-    queryset = GalleryPhoto.objects.all()
-    serializer_class = GalleryPhotoSerializer
-    lookup_field = 'id'
 
 
 

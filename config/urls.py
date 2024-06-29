@@ -31,7 +31,6 @@ urlpatterns = [
     path('api/v1/landing/products/', include('products.landing.urls')),
     path('api/v1/admin/products/', include('products.urls')),
     path('api/v1/admin/users/', include('users.urls')),
-    path('api/v1/landing/users/', include('users.landing.urls')),
 
     # packages
     path('ckeditor/', include('ckeditor_uploader.urls')),
