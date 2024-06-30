@@ -160,12 +160,6 @@ LANGUAGES = [
     ('ru', 'Russia'),
     ('uz', 'Uzbekistan'),
 ]
-# CKE editor
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'full',
-#     },
-# }
 
 LOCALE_PATHS = (
     BASE_DIR / 'locale',
