@@ -59,7 +59,7 @@ class User(AbstractUser, BaseModel):
 class UserContactApplication(BaseModel):
     full_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=50, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     is_contacted = models.BooleanField(default=False)
 
     def __str__(self):
@@ -69,5 +69,6 @@ class UserContactApplication(BaseModel):
         verbose_name = _('User Contact Application')
         verbose_name_plural = _('User Contact Applications')
         db_table = 'user_contact_application'
+        order_by = ['-id']
 
 
