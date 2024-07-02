@@ -69,6 +69,6 @@ class UserContactApplication(BaseModel):
         verbose_name = _('User Contact Application')
         verbose_name_plural = _('User Contact Applications')
         db_table = 'user_contact_application'
-        order_by = ['-id']
+        ordering = ['-created_at']
 
 

@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView, \
+    UpdateAPIView, RetrieveAPIView, DestroyAPIView, RetrieveDestroyAPIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from users import models
@@ -13,7 +14,21 @@ class UserList(ListAPIView):
     permission_classes = [IsAdminUser]
 
 
-class UserDetail(RetrieveUpdateDestroyAPIView):
+class UserDetail(RetrieveAPIView):
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
+    permission_classes = [IsAdminUser]
+    lookup_field = 'id'
+
+
+class UserUpdateView(UpdateAPIView):
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
+    permission_classes = [IsAdminUser]
+    lookup_field = 'id'
+
+
+class UserDeleteView(DestroyAPIView):
     serializer_class = serializers.UserSerializer
     queryset = models.User.objects.all()
     permission_classes = [IsAdminUser]
@@ -21,7 +36,7 @@ class UserDetail(RetrieveUpdateDestroyAPIView):
 
 
 class UserCreate(CreateAPIView):
-    serializer_class = serializers.UserContactCreateSerializer
+    serializer_class = serializers.UserCreateSerializer
     queryset = models.User.objects.all()
     permission_classes = [IsAdminUser]
 
@@ -32,8 +47,15 @@ class UserContactView(ListAPIView):
     permission_classes = [IsAdminUser]
 
 
-class UserContactDetail(RetrieveUpdateDestroyAPIView):
+class UserContactDetail(RetrieveDestroyAPIView):
     serializer_class = serializers.UserContactSerializer
+    lookup_field = 'id'
+    queryset = models.UserContactApplication.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+class UserContactUpdate(UserUpdateView):
+    serializer_class = serializers.UserContactUpdateSerializer
     lookup_field = 'id'
     queryset = models.UserContactApplication.objects.all()
     permission_classes = [IsAdminUser]

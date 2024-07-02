@@ -14,6 +14,16 @@ class UserSerializer(serializers.ModelSerializer):
         ref_name = 'AdminUserSerializer'
 
 
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = (
+            'full_name',
+            'email',
+            'password',
+        )
+
+
 class UserContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserContactApplication
@@ -23,13 +33,22 @@ class UserContactSerializer(serializers.ModelSerializer):
 
 class UserContactCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.User
+        model = models.UserContactApplication
         fields = (
-            'email',
             'full_name',
-            'password',
+            'phone',
+            'is_contacted',
         )
         ref_name = 'AdminUserCreateSerializer'
+
+
+class UserContactUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserContactApplication
+        fields = (
+            'is_contacted',
+        )
+        ref_name = 'AdminUserContactUpdateSerializer'
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -40,19 +59,18 @@ class UserLoginSerializer(serializers.Serializer):
         email = validated_data['email']
         password = validated_data['password']
         user = authenticate(email=email, password=password)
-        try:
-            if user.is_superuser:
-                if user is None:
-                    raise AuthenticationFailed()
-                try:
-                    token = Token.objects.get(user=user)
-                except Token.DoesNotExist:
-                    token = Token.objects.create(user=user)
-                return {
-                    'token': token.key,
-                }
-        except AttributeError:
+        if user is None:
             raise AuthenticationFailed()
+        if not user.is_staff:
+            raise AuthenticationFailed('Only admin users can log in')
+        try:
+            token = Token.objects.get(user=user)
+        except Token.DoesNotExist:
+            token = Token.objects.create(user=user)
+        return {
+            'token': token.key,
+            }
+
 
 
 
