@@ -27,7 +27,6 @@ urlpatterns = [
     path('api/v1/landing/common/', include('common.landing.urls')),
     path('api/v1/admin/common/', include('common.urls')),
     path('api/v1/admin/orders/', include('order.urls')),
-    path('api/v1/landing/orders/', include('order.landing.urls')),
     path('api/v1/landing/products/', include('products.landing.urls')),
     path('api/v1/admin/products/', include('products.urls')),
     path('api/v1/admin/users/', include('users.urls')),
