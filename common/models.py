@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Settings(BaseModel):
     objects = models.Manager()
+
     contact_telegram = models.CharField(max_length=120)
     contact_phone = models.CharField(max_length=30, null=True, blank=True)
     longitude = models.BigIntegerField()

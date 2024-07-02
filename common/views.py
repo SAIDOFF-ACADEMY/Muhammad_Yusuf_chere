@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
-from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateAPIView, CreateAPIView, \
+from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView, \
     RetrieveUpdateDestroyAPIView, DestroyAPIView
 
 from common import serializers
