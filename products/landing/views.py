@@ -1,5 +1,4 @@
-from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView
 
 from products import models
 from products.landing import serializers
