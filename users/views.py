@@ -61,12 +61,6 @@ class UserContactUpdate(UserUpdateView):
     permission_classes = [IsAdminUser]
 
 
-class UserContactCreate(CreateAPIView):
-    serializer_class = serializers.UserContactSerializer
-    queryset = models.UserContactApplication
-    permission_classes = [IsAdminUser]
-
-
 class UserLoginView(GenericAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserLoginSerializer

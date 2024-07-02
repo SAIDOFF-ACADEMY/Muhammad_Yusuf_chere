@@ -15,5 +15,4 @@ urlpatterns = [
     path('user_contacts/', views.UserContactView.as_view()),
     path('user_contact/<int:id>/', views.UserContactDetail.as_view()),
     path('user_contact/<int:id>/update/', views.UserContactUpdate.as_view()),
-    path('user_contacts/create/', views.UserContactCreate.as_view()),
 ]

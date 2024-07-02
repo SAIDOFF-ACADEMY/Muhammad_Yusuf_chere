@@ -31,15 +31,7 @@ class UserContactSerializer(serializers.ModelSerializer):
         ref_name = 'AdminUserContactSerializer'
 
 
-class UserContactCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.UserContactApplication
-        fields = (
-            'full_name',
-            'phone',
-            'is_contacted',
-        )
-        ref_name = 'AdminUserCreateSerializer'
+
 
 
 class UserContactUpdateSerializer(serializers.ModelSerializer):

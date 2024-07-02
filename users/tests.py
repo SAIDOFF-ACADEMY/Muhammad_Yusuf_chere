@@ -119,20 +119,6 @@ class UserContactApplicationTestCase(APITestCase):
         self.client = APIClient()
         self.user = User.objects.create_superuser(email='test@mail.com', password='test')
 
-    def test_user_contacts_create(self):
-        self.client.login(email='test@mail.com', password='test')
-        user_contacts_count = UserContactApplication.objects.count()
-        data = {
-            'full_name': 'Test Test',
-            'phone': '+98551235'
-        }
-        response = self.client.post('http://127.0.0.1:8000/api/v1/admin/users/user_contacts/create/', data=data)
-
-        user_contacts_count = UserContactApplication.objects.count()
-
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(user_contacts_count, 1)
-
     def test_all_users_contacts(self):
         self.client.login(email='test@mail.com', password='test')
         UserContactApplication.objects.create(full_name='test', phone='+95555', is_contacted=True)
