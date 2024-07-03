@@ -61,7 +61,7 @@ class GalleryView(ListAPIView):
 
 
 class GalleryCreateView(CreateAPIView):
-    serializer_class = serializers.GallerySerializer
+    serializer_class = serializers.GalleryCreateSerializer
     permission_classes = [IsAdminUser, ]
     queryset = models.GalleryPhoto.objects.all()
 

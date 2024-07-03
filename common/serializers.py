@@ -19,5 +19,12 @@ class PageSerializer(serializers.ModelSerializer):
 class GallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.GalleryPhoto
-        fields = ('photo', )
+        fields = '__all__'
+        ref_name = 'AdminPhotoSerializer'
+
+
+class GalleryCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GalleryPhoto
+        fields = ('photo',)
         ref_name = 'AdminPhotoSerializer'
