@@ -1,6 +1,16 @@
+from PIL import Image
+import tempfile
 from rest_framework.test import APITestCase, APIClient
 from common.models import Settings, Page, GalleryPhoto
 from users.models import User
+
+
+def example_image():
+    image = Image.new('RGB', (100, 100))
+    tmp_file = tempfile.NamedTemporaryFile(suffix='.jpg')
+    image.save(tmp_file)
+    tmp_file.seek(0)
+    return tmp_file
 
 
 class SettingsTestCase(APITestCase):
@@ -153,11 +163,13 @@ class GalleryPhotoTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 204)
 
-    # def test_create_photo(self):
-    #     self.client.login(email='test@mail.com', password='test')
-    #     data = {
-    #         'photo': 'test1213323.png',
-    #     }
-    #     response = self.client.post('/api/v1/admin/common/photo/create/', data=data)
-    #
-    #     self.assertEqual(response.status_code, 201)
+    def test_create_photo(self):
+        self.client.login(email='test@mail.com', password='test')
+        data = {
+            'photo': example_image()
+        }
+
+        response = self.client.post('/api/v1/admin/common/photo/create/', data=data, format='multipart')
+
+        self.assertEqual(response.status_code, 201)
+        self.assertIn('photo', response.data)
