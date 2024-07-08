@@ -1,4 +1,4 @@
-{% load i18n static %}<!DOCTYPE html>
+{% load i18n static %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 <head>
@@ -66,9 +66,6 @@
                                 </form>
                                 {% include "admin/color_theme_toggle.html" %}
                             {% endblock %}
-
-
-
                             <form action="/i18n/setlang/" method="post">
                                 {% csrf_token %}
                                 <select name="language">

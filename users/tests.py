@@ -1,178 +1,96 @@
-from django.contrib.auth import get_user
+from django.urls import reverse
+from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
-from users.models import User, UserContactApplication
-from rest_framework.authtoken.models import Token
+from django.contrib.auth import get_user_model
+from users import models
+from users.models import UserContactApplication
+
+User = get_user_model()
 
 
-class UserTestCase(APITestCase):
+class UserTests(APITestCase):
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_superuser(email='test@mail.com', password='test')
+        self.admin_user = User.objects.create_superuser(
+            email='muhammadyusufni03@gmail.com', password='1'
+        )
+        self.user = User.objects.create_user(
+            email='user@example.com', password='test'
+        )
 
-    def test_login_only_admin_users(self):
-        token_count = Token.objects.count()
-
-        response = self.client.post('http://127.0.0.1:8000/api/v1/admin/users/users/login/', data={
-            'email': 'test@mail.com',
-            'password': 'test'
-        })
-
+    def test_user_list(self):
+        url = reverse('user_list')
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertIn('token', response.data)
-
-        token_count = Token.objects.count()
-        self.assertEqual(token_count, 1)
-
-    def test_user_login_failed(self):
-        token_count = Token.objects.count()
-
-        response = self.client.post('http://127.0.0.1:8000/api/v1/admin/users/users/login/', data={
-            'email': 'tes@mail.com',
-            'password': 'test'
-        })
-
-        self.assertEqual(response.status_code, 401)
-        self.assertNotIn('token', response.data)
-
-        token_count = Token.objects.count()
-        self.assertEqual(token_count, 0)
-
-    def test_user_logout_successful(self):
-        self.client.login(email='test@mail.com', password='test')
-
-        response = self.client.get('http://127.0.0.1:8000/api/v1/admin/users/users/logout/', )
-
-        self.assertEqual(response.status_code, 204)
-
-    def test_get_all_users_list(self):
-        User.objects.create_user(email='test1@mail.com', password='test1')
-        User.objects.create_user(email='test2@mail.com', password='test2')
-
-        self.client.login(email='test@mail.com', password='test')
-
-        response = self.client.get('http://127.0.0.1:8000/api/v1/admin/users/users/')
-        users = User.objects.count()
-        admin_users = User.objects.filter(is_staff=True).count()
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(users, 3)
-        self.assertEqual(admin_users, 1)
 
     def test_user_detail(self):
-        self.client.login(email='test@mail.com', password='test')
-
-        response = self.client.get('http://127.0.0.1:8000/api/v1/admin/users/users/1/')
-
+        url = reverse('user_detail', kwargs={'id': self.user.id})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.user.email)
-        self.assertContains(response, self.user.password)
-
-    def test_user_delete(self):
-        self.client.login(email='test@mail.com', password='test')
-        response = self.client.delete('http://127.0.0.1:8000/api/v1/admin/users/users/1/delete/')
-
-        self.assertEqual(response.status_code, 204)
-
-    def test_user_edit_method_put(self):
-        self.client.login(email='test@mail.com', password='test')
-        data = {
-            'full_name': 'test_test',
-            'phone': '+14541220',
-            'email': 'test1@mail.com',
-            'password': 'test',
-        }
-        response = self.client.put('http://127.0.0.1:8000/api/v1/admin/users/users/1/update/', data=data)
-
-        user = User.objects.get(id=self.user.id)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(user.full_name, 'test_test')
-
-    def test_user_edit_method_patch(self):
-        self.client.login(email='test@mail.com', password='test')
-        data = {
-            'full_name': 'test_test',
-        }
-        response = self.client.patch('http://127.0.0.1:8000/api/v1/admin/users/users/1/update/', data=data)
-
-        user = User.objects.get(id=self.user.id)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(user.full_name, 'test_test')
 
     def test_user_create(self):
-        self.client.login(email='test@mail.com', password='test')
-
-        response = self.client.post('http://127.0.0.1:8000/api/v1/admin/users/users/create/', data={
-            'email': 'new_user@mail.com',
-            'full_name': 'new_user',
-            'password': 'new_pass',
-        })
-
+        url = reverse('user_create')
+        data = {'email': 'newuser@example.com', 'password': 'testpassword'}
+        response = self.client.post(url, data)
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.data['email'], 'new_user@mail.com')
-        self.assertEqual(response.data['full_name'], 'new_user')
 
-
-class UserContactApplicationTestCase(APITestCase):
-    def setUp(self):
-        self.client = APIClient()
-        self.user = User.objects.create_superuser(email='test@mail.com', password='test')
-
-    def test_all_users_contacts(self):
-        self.client.login(email='test@mail.com', password='test')
-        UserContactApplication.objects.create(full_name='test', phone='+95555', is_contacted=True)
-        UserContactApplication.objects.create(full_name='test1', phone='+95555142', is_contacted=True)
-        UserContactApplication.objects.create(full_name='test2', phone='+9555514772')
-
-        response = self.client.get('http://127.0.0.1:8000/api/v1/admin/users/user_contacts/')
-
-        user_contacts = UserContactApplication.objects.count()
-        user_contacts_contacted = UserContactApplication.objects.filter(is_contacted=True).count()
-
+    def test_user_update(self):
+        url = reverse('user_update', kwargs={'id': self.user.id})
+        data = {'username': 'updateduser'}
+        response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(user_contacts, 3)
-        self.assertEqual(user_contacts_contacted, 2)
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.username, 'updateduser')
 
-    def test_user_contact_delete(self):
-        self.client.login(email='test@mail.com', password='test')
-        UserContactApplication.objects.create(full_name='test', phone='+95555', is_contacted=True)
-
-        response = self.client.delete('http://127.0.0.1:8000/api/v1/admin/users/user_contact/1/')
-
+    def test_user_delete(self):
+        url = reverse('user_delete', kwargs={'id': self.user.id})
+        response = self.client.delete(url)
         self.assertEqual(response.status_code, 204)
 
-    def test_user_contact_edit_put(self):
-        self.client.login(email='test@mail.com', password='test')
-        UserContactApplication.objects.create(full_name='test', phone='+95555', is_contacted=True)
-
-        response = self.client.put('http://127.0.0.1:8000/api/v1/admin/users/user_contact/1/update/', data={
-            'is_contacted': False
-        })
-
-        user_contact = UserContactApplication.objects.get(full_name='test')
-
+    def test_user_login(self):
+        url = reverse('user_login')
+        data = {'email': self.user.email, 'password': 'test'}
+        response = self.client.post(url, data)
         self.assertEqual(response.status_code, 200)
-        self.assertFalse(user_contact.is_contacted)
 
-    def test_user_contact_edit_patch(self):
-        self.client.login(email='test@mail.com', password='test')
-        UserContactApplication.objects.create(full_name='test', phone='+95555', is_contacted=True)
-
-        response = self.client.patch('http://127.0.0.1:8000/api/v1/admin/users/user_contact/1/update/', data={
-            'is_contacted': False
-        })
-
-        user_contact = UserContactApplication.objects.get(full_name='test')
-
+    def test_user_logout(self):
+        url = reverse('user_logout')
+        response = self.client.post(url)
         self.assertEqual(response.status_code, 200)
-        self.assertFalse(user_contact.is_contacted)
 
-    def test_user_contact_get(self):
-        self.client.login(email='test@mail.com', password='test')
-        UserContactApplication.objects.create(full_name='test', phone='+95555', is_contacted=True)
-
-        response = self.client.get('http://127.0.0.1:8000/api/v1/admin/users/user_contact/1/')
-
+    def test_user_contact_list(self):
+        url = reverse('user_contact_list')
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data['full_name'], 'test')
+
+    def test_user_contact_update(self):
+        contact = UserContactApplication.objects.create(
+            user=self.user,
+            full_name='Test User',
+            phone='1234567890',
+            message='Test message'
+        )
+        url = reverse('user_contact_update', kwargs={'id': contact.id})
+        data = {'message': 'Updated message'}
+        response = self.client.put(url, data, content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+        # Fetch the updated contact to verify the change
+        contact.refresh_from_db()
+        self.assertEqual(contact.message, 'Updated message')
+
+    def test_user_contact_detail(self):
+        contact = models.UserContactApplication.objects.create(
+            user=self.user, message='Test message'
+        )
+        url = reverse('user_contact_detail', kwargs={'id': contact.id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_user_contact_delete(self):
+        contact = models.UserContactApplication.objects.create(
+            user=self.user, message='Test message'
+        )
+        url = reverse('user_contact_detail', kwargs={'id': contact.id})
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)

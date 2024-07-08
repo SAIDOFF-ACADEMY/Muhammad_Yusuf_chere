@@ -1,7 +1,14 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
-from shared.models import BaseModel
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy
+
+
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
 
 class Settings(BaseModel):
@@ -11,14 +18,14 @@ class Settings(BaseModel):
     contact_phone = models.CharField(max_length=30, null=True, blank=True)
     longitude = models.BigIntegerField()
     latitude = models.BigIntegerField()
-    location_text = models.TextField(_('location_text'))
+    location_text = models.TextField(gettext_lazy('location_text'))
     working_hours_start = models.TimeField()
     working_hours_end = models.TimeField()
     telegram_bot = models.CharField(max_length=120)
 
     class Meta:
-        verbose_name = _('Settings')
-        verbose_name_plural = _("Settings")
+        verbose_name = gettext_lazy('Settings')
+        verbose_name_plural = gettext_lazy("Settings")
         db_table = 'settings'
 
     def __str__(self):
@@ -26,9 +33,9 @@ class Settings(BaseModel):
 
 
 class Page(BaseModel):
-    title = models.CharField(_('title'), max_length=250)
+    title = models.CharField(gettext_lazy('title'), max_length=250)
     slug = models.SlugField(unique=True, max_length=250)
-    content = RichTextUploadingField(_('content'))
+    content = RichTextUploadingField(gettext_lazy('content'))
 
     objects = models.Manager()
 
@@ -36,8 +43,8 @@ class Page(BaseModel):
         return self.title
 
     class Meta:
-        verbose_name = _('Page')
-        verbose_name_plural = _("Pages")
+        verbose_name = gettext_lazy('Page')
+        verbose_name_plural = gettext_lazy("Pages")
         db_table = 'pages'
 
 
@@ -50,7 +57,7 @@ class GalleryPhoto(BaseModel):
         return self.photo.name
 
     class Meta:
-        verbose_name = _('Gallery Photo')
-        verbose_name_plural = _('Gallery Photos')
+        verbose_name = gettext_lazy('Gallery Photo')
+        verbose_name_plural = gettext_lazy('Gallery Photos')
         db_table = 'gallery_photo'
 

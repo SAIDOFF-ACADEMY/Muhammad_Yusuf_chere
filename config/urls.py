@@ -6,21 +6,27 @@ from django.conf import settings
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from django.shortcuts import redirect
+
+
+def home(request):
+    return redirect('/swagger/')
+
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="Chere Water API",
-      default_version='v1',
-      description="This is chere water project",
-      contact=openapi.Contact(email="xoliqberdiyevbehruz12@gmail.com"),
-      license=openapi.License(name="demo license"),
-   ),
-   public=True,
-   permission_classes=(permissions.AllowAny,),
+    openapi.Info(
+        title="Chere Water API",
+        default_version='v1',
+        description="This is chere water project",
+        contact=openapi.Contact(email="xoliqberdiyevbehruz12@gmail.com"),
+        license=openapi.License(name="demo license"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
-
 urlpatterns = [
+    path("", home, name="home"),
     path("i18n/", include("django.conf.urls.i18n")),
     path('admin/', admin.site.urls),
     path('api/v1/admin/common/', include('common.urls')),
@@ -31,8 +37,6 @@ urlpatterns = [
     path('api/v1/admin/products/', include('products.urls')),
     path('api/v1/admin/users/', include('users.urls')),
     path('api/v1/landing/users/', include('users.landing.urls')),
-
-    # packages
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

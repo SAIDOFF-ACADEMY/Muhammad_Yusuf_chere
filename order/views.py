@@ -2,7 +2,6 @@ from aiogram.methods import Response
 from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView
-
 from order import serializers
 from order import models
 

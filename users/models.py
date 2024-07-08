@@ -1,8 +1,15 @@
 from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
-from shared.models import BaseModel
 from django.utils.translation import gettext_lazy as _
+
+
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
 
 class UserCreateManager(UserManager):
@@ -61,6 +68,7 @@ class UserContactApplication(BaseModel):
     phone = models.CharField(max_length=50, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     is_contacted = models.BooleanField(default=False)
+    message = models.TextField()
 
     def __str__(self):
         return self.full_name
